@@ -27,15 +27,19 @@ cd GEB-2021-0553
 docker build -t rvalavi:4.0 .
 ```
 
-Wait until the build is complete.
+Wait until the build is complete. Then check to see the images is created.
+```bash
+docker images
+```
+You should see `rvalavi` with TAG 4.0 listed as a docker image.
 
 ## Run the docker container
 
 
 ```bash
-docker run --name rstudio -p 8787:8787 -e PASSWORD=123 -v /home/rvalavi:project -d rvalavi:4.0
+docker run --name rstudio -p 8787:8787 -e PASSWORD=123 -e USER=user -v /home/rvalavi/testproj:project -d rvalavi:4.0
 
 ```
 
 ## Run RStudio server
-Open an internet browser and go to `localhost:8787` to open RStudio. Use the password you specified in the previous step (here is: 123) to open RStudio.
+Open an internet browser and go to `localhost:8787` to open RStudio. Use the user and password you specified in the previous step (here user is "user" and password is "123") to open RStudio.
