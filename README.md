@@ -52,3 +52,5 @@ docker run --name rstudio -p 8787:8787 -e PASSWORD=123 -e USER=user -v /home/rva
 
 ## Run RStudio server
 Open an internet browser and go to `localhost:8787` to open RStudio. Use the user and password you specified in the previous step (here user is "user" and password is "123") to open RStudio.
+
+![](rstudio.png)
