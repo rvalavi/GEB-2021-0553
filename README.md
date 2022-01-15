@@ -35,6 +35,14 @@ You should see `rvalavi` with TAG 4.0 listed as a docker image.
 
 ## Run the docker container
 
+After the image is created, you need to run a container to get access to the app and packages. The docker container is a live instance of the image and you can use and even make change to it. This however will not changes the image. 
+Use the following command to run a container. This code has several components:
+`--name`: name of the container
+`-p`: port in which container is connected. We use this to connect to rstudio
+`-e USER` and `-e PASSWORD`: user and password for the rstudio server
+`-v`: mapping a directory in the local system to a directory in the container. This will allow us to save the generated files and code in local drive and access the code and data inside the disk
+`-d`: run the container in the background
+`rvalavi:4.0`: name and tag of the docker image
 
 ```bash
 docker run --name rstudio -p 8787:8787 -e PASSWORD=123 -e USER=user -v /home/rvalavi/testproj:project -d rvalavi:4.0
