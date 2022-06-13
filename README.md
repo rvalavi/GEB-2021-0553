@@ -46,11 +46,11 @@ This code has several components:
 `rvalavi:4.0`: name and tag of the docker image  
 
 ```bash
-docker run --name rstudio -p 8787:8787 -e PASSWORD=123 -e USER=user -v /home/rvalavi/testproj:project -d rvalavi:4.0
+docker run --name rstudio -p 8787:8787 -e PASSWORD=123 -e USER=rstudio -v /home/rvalavi/testproj:project -d rvalavi:4.0
 
 ```
 
 ## Run RStudio server
-Open an internet browser and go to `localhost:8787` to open RStudio. Use the user and password you specified in the previous step (here user is "user" and password is "123") to open RStudio.
+Open an internet browser and go to `localhost:8787` to open RStudio. Use the user and password you specified in the previous step (here user is "rstudio" and password is "123") to open RStudio.
 
 ![](rstudio.png)

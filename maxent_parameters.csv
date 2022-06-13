@@ -1,0 +1,8 @@
+Model,Parameter,Value,Description
+MaxEnt (default),betamultiplier,1,regularization multiplier
+,args,nothreshold,auto select feature and exclude threshold feature
+MaxEnt noclamp,,,the same as MaxEnt (default) with clammping set to off for prediction
+MaxEnt LQ,betamultiplier,1,regularization multiplier
+,feature types,LQ,"transformations of input covariates. L: linear, Q: quadratic"
+MaxEnt tuned and spatial-tuned,betamultiplier,"0.5, 1, 2, 3, 4",regularization multiplier
+,feature types,"L, LQ, H, LQH, LQHP","transformations of input covariates. L: linear, Q: quadratic, H: hinge, P: product"
