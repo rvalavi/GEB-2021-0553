@@ -69,7 +69,7 @@ In the main text, the mean performance and the average rank of performance metri
 ```{r fig.height=5, fig.width=6, fig.cap="Top rank models in random partitioning."}
 library(tidyverse)
 
-cv_result <- read.csv("output/nceas_blockcv_total.csv")
+cv_result <- read.csv("results/nceas_blockcv_total.csv")
 
 # changing the names
 cv_result$model <- ifelse(cv_result$model == "RF", "RF down-sample", cv_result$model)
@@ -357,7 +357,7 @@ To further highlight the difference between the performance of models, we calcul
 ```{r}
 library(tidyverse)
 
-cv_result <- read.csv("output/nceas_blockcv_total.csv")
+cv_result <- read.csv("results/nceas_blockcv_total.csv")
 
 cv_result <- filter(cv_result, !model %in% c("GAM-unweighted", "GLM-unweighted"))
 
@@ -491,8 +491,8 @@ MaxEnt is also presented as two variants here, the MaxEnt with forced LQ feature
 
 ```{r fig.width=8, fig.height=4, fig.cap="Perfromance of implementation of BRT and MaxEnt with forced limited flexibility."}
 # BRT and Maxent second run -----------------------------------------------
-cv_result <- read.csv("output/nceas_blockcv_total.csv")
-brtmxnt <- read.csv("output/nceas_blockcv_brt_maxent.csv")
+cv_result <- read.csv("results/nceas_blockcv_total.csv")
+brtmxnt <- read.csv("results/nceas_blockcv_brt_maxent.csv")
 
 # changing the names
 cv_result$model <- ifelse(cv_result$model == "RF", "RF down-sample", cv_result$model)
@@ -608,17 +608,13 @@ In Figure 7, we summed the number of testing points with extrapolation (negative
 ```{r }
 library(tidyverse)
 
-messall <- list.files("output/nceas_blockcv_mess", full.names = TRUE) %>% 
-  map(read.csv) %>% 
-  do.call(rbind.data.frame, .)
+messall <- read_csv("results/nceas_blockcv_mess.csv")
 
 ```
 
 
 ```{r, fig.width=8, fig.height=4, fig.cap="The sum of extrapolated points of each species in each region."}
 messall %>% 
-  group_by(species, region, cv) %>% 
-  summarise(extrapolate = sum(mess < 0)) %>% # / n()
   mutate(cv = paste(str_to_title(cv), "partitioning")) %>% 
 ggplot(data = ., aes(x = region, y = extrapolate)) +
   geom_boxplot() +
@@ -634,8 +630,6 @@ Figure 8 shows the number of extrapolated sites with spatial partitioning compar
 
 ```{r, fig.cap="The sum of the number of extrapolated points in each species in random vs spatial partitioning."}
 messall %>% 
-  group_by(species, region, cv) %>% 
-  summarise(extrapolate = sum(mess < 0)) %>% 
   pivot_wider(names_from = cv, values_from = extrapolate) %>% 
 ggplot(data = ., aes(y = spatial, x = random, col = region)) +
   geom_point(size = 2.5, alpha = 0.4) +
@@ -657,7 +651,7 @@ Here the statistical test on the differences between models in random partitioni
 library(tidyverse)
 library(scmamp)
 
-cv_result <- read.csv("output/nceas_blockcv_total.csv")
+cv_result <- read.csv("results/nceas_blockcv_total.csv")
 
 # changing the names
 cv_result$model <- ifelse(cv_result$model == "RF", "RF down-sample", cv_result$model)
@@ -772,7 +766,7 @@ Here the statistical test for MaxEnt models are presented. The Friedman's Aligne
 library(tidyverse)
 library(scmamp)
 
-cv_result <- read.csv("output/nceas_blockcv_total.csv")
+cv_result <- read.csv("results/nceas_blockcv_total.csv")
 
 cv_result2 <- filter(cv_result, model %in% c("MaxEnt", 
                                              "MaxEnt-tuned", 
@@ -961,32 +955,32 @@ You can run models by running the `R/nceas_modelling.R` script.
 Table **3 to 8** show the environmental covariates used in each region. These are the variables that do not have a pairwise correlation of more than 0.8. You can find a complete list of variables with more details in Elith *et al.* (2020), and in the help of the [`disdat`](https://CRAN.R-project.org/package=disdat) R package.
 
 ```{r}
-knitr::kable(read.csv("Environment/AWT_environment.csv"), caption = "Environmental vartiables for AWT region.")
+knitr::kable(read.csv("results/AWT_environment.csv"), caption = "Environmental vartiables for AWT region.")
 
 ```
 
 ```{r}
-knitr::kable(read.csv("Environment/CAN_environment.csv"), caption = "Environmental vartiables for CAN region.")
+knitr::kable(read.csv("results/CAN_environment.csv"), caption = "Environmental vartiables for CAN region.")
 
 ```
 
 ```{r}
-knitr::kable(read.csv("Environment/NSW_environment.csv"), caption = "Environmental vartiables for NSW region.")
+knitr::kable(read.csv("results/NSW_environment.csv"), caption = "Environmental vartiables for NSW region.")
 
 ```
 
 ```{r}
-knitr::kable(read.csv("Environment/NZ_environment.csv"), caption = "Environmental vartiables for NZ region.")
+knitr::kable(read.csv("results/NZ_environment.csv"), caption = "Environmental vartiables for NZ region.")
 
 ```
 
 ```{r}
-knitr::kable(read.csv("Environment/SA_environment.csv"), caption = "Environmental vartiables for SA region.")
+knitr::kable(read.csv("results/SA_environment.csv"), caption = "Environmental vartiables for SA region.")
 
 ```
 
 ```{r}
-knitr::kable(read.csv("Environment/SWI_environment.csv"), caption = "Environmental vartiables for SWI region.")
+knitr::kable(read.csv("results/SWI_environment.csv"), caption = "Environmental vartiables for SWI region.")
 
 ```
 

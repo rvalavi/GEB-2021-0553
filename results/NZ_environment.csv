@@ -1,0 +1,12 @@
+﻿Code,Description,Units,Type
+age,soil parent material: age since last major rejuvenation,number (category),Categorical
+deficit,mean October vapor pressure deficit at 0900 hours,kPa,Continous
+hillshade,surrogate for slope and aspect,number (dimensionless index),Continous
+mas,mean annual solar radiation,MJm^-2 day^-1 * 100,Continous
+mat,mean annual temperature,°C * 10,Continous
+r2pet,average monthly ratio of potential evapotranspiration,number (dimensionless index),Continous
+slope,slope,degrees,Continous
+sseas,solar radiation seasonality,number (dimensionless index),Continous
+toxicats,toxic cations in soil,number (category),Categorical
+tseas,temperature seasonality,number (dimensionless index),Continous
+vpd,annual vapor pressure deficit,kPa,Continous

@@ -1,0 +1,13 @@
+﻿Code,Description,Units,Type
+BCC,broadleaved continuous cover,% cover,Continous
+CALC,bedrock strictly calcareous vs other type,1 (present) or 0 (absent),Categorical
+CCC,coniferous continuous cover,% cover,Continous
+DDEG,growing degree-days above the threshold of 0°C,°C * days,Continous
+NUTRI,soil nutrients index,D mval/cm2,Continous
+PDAY,number of days with rainfall > 1 mm,ndays,Continous
+PRECYY,average yearly precipitation sum,mm,Continous
+SFROYY,summer frost frequency – number of days,days,Continous
+SLOPE,slope,degrees x 10,Continous
+SRADYY,potential yearly global radiation (daily average),kJm-2day-1 ,Continous
+SWB,site water balance,mm,Continous
+TOPO,topographic position,number (dimensionless index),Continous

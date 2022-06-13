@@ -1,0 +1,9 @@
+﻿Code,Description,Units,Type
+bc04,Temperature seasonality,NA,Continuous
+bc05,Max. temperature of warmest period,˚C,Continuous
+bc06,Min. temperature of coldest period.,˚C,Continuous
+bc12,Annual precipitation,mm,Continuous
+bc15,Precipitation seasonality,NA,Continuous
+slope,Mean slope (derived from 9 second spatial resolution elevation data),percent,Continuous
+topo,Topographic position,NA,Continuous
+tri,Terrain ruggedness index,NA,Continuous

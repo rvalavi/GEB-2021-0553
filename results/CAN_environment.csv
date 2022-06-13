@@ -1,0 +1,8 @@
+﻿Code,Description,Units,Type
+alt,Digital elevation,m,Continuous
+asp2,Aspect – ranges from -1 to 1 (sin transformation),number (dimensionless unit),Continuous
+ontprec,Annual Precipitation,mm,Continuous
+ontslp,Slope,degrees,Continuous
+onttemp,Annual mean temperature,˚C * 10,Continuous
+ontveg,"Vegetation, from Ontario Land Cover Database (OLC) vegetation map, derived from a mosaic of Landsat images.",number (dimensionless unit),Categorical
+watdist,Distance from Hudson Bay,m,Continuous

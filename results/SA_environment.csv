@@ -1,0 +1,9 @@
+﻿Code,Description,Units,Type
+sabio2,mean diurnal range (mean of monthly (max temp - min temp)),˚C*10,Continous
+sabio4,temperature seasonality (standard deviation *100),number (dimensionless index),Continous
+sabio5,max temperature of warmest month,˚C*10,Continous
+sabio6,min temperature of coldest month,˚C*10,Continous
+sabio12,annual precipitation,mm,Continous
+sabio15,precipitation seasonality (coefficient of variation),number (dimensionless index),Continous
+sabio17,precipitation of driest quarter,mm,Continous
+sabio18,precipitation of warmest quarter,mm,Continous

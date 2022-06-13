@@ -1,0 +1,12 @@
+﻿Code,Description,Units,Type
+cti,compound topographic index- a quantification of the position of a site in the local landscape,number (dimensionless index),Continous
+disturb,"disturbance (clearing, logging etc)",number (ordinal),Continous
+mi,moisture index.,number (dimensionless index),Continous
+rainann,mean annual rainfall,Mm,Continous
+raindq,mean rainfall of the driest quarter,Mm,Continous
+rugged,ruggedness,number (dimensionless index),Continous
+soildepth,mean soil depth,m *1000,Continous
+soilfert,soil fertility,number (ordinal),Continous
+solrad,annual mean solar radiation,MJm-2 day-1 * 10,Continous
+tempann,annual mean temperature,°C * 10,Continous
+topo,topographic position,m,Continous
