@@ -21,7 +21,6 @@ RUN apt-get update && \
 # copy script and data
 COPY R/ /home/rstudio/R
 COPY data/ home/rstudio/data
-COPY maxent.jar /usr/local/lib/R/site-library/dismo/java/
 
 # change working directory
 WORKDIR /project
@@ -37,6 +36,9 @@ RUN Rscript -e  "remotes::install_github('b0rxa/scmamp')"
 RUN Rscript -e  "remotes::install_github('rvalavi/myspatial')"
 RUN Rscript -e "remotes::install_version('gam', version = '1.20', repos = 'http://cran.us.r-project.org')"
 RUN Rscript -e "remotes::install_version('gbm', version = '2.1.5', repos = 'http://cran.us.r-project.org')"
+
+# copy maxent.jar file to dismo package
+COPY maxent.jar /usr/local/lib/R/site-library/dismo/java/
 
 # expose port
 EXPOSE 8787
