@@ -481,9 +481,9 @@ ggplot(data = diff_mean, aes(x = model, y = value, col = value)) +
 Figure 5 demonstrate the difference in $AUC_{ROC}$ of each model with the worst model (model with the lowest $AUC_{ROC}$) for each species. higher values means better performance.
 
 
-## BRT vs BTR-stump and MaxEnt-LQP vs MaxEnt-LQ
+## Interactions in BRT and MaxEnt
 
-We also tried a couple of other models to check whether the limited flexibility can affect the performance. We implemented a BRT model with a limited tree-complexity of `1` also known as **stump**. The main difference between the BRT-stump and the default BRT (with tree-complexity 1 or 5) is that the default BRT can fit a higher level of interaction between the covariates. The implemented BRT model here (Elith *et al.* 2008) utilized internal cross-validation to fund the right complexity for the mode. Thus, by limiting tree-complexity to 1, the model adds more trees to find a similar balance in the fitted model as the BRT with tree-complexity 5.    
+To assess the impacts of interactions in flexible models, we compare two of our top methods, BRT and MaxEnt, with and without interactions. We implemented a BRT model with a limited tree-complexity of `1` also known as **stump**. The main difference between the BRT-stump and the default BRT (with tree-complexity 1 or 5) is that the default BRT can fit a higher level of interaction between the covariates. The implemented BRT model here (Elith *et al.* 2008) utilized internal cross-validation to fund the right complexity for the model. Thus, by limiting tree-complexity to 1, the model adds more trees to find a similar balance in the fitted model as the BRT with tree-complexity 5.    
 MaxEnt is also presented as two variants here, the MaxEnt with forced LQ features and one with LQP features. The main difference between these two is that MaxEnt-LQP accommodates interaction as the product of the linear features.
 
 
@@ -896,7 +896,7 @@ The following command are terminal commands.
 You need to have [`git`](https://git-scm.com/) installed on your system.
 
 ```{bash eval=FALSE, echo=TRUE}
-git clone https://github.com/rvalavi/GEB-2021-0553.git
+git clone https://github.com/rvalavi/SDM-Spatial-Validation.git
 
 ```
 
@@ -906,7 +906,7 @@ In Linux system you might need to use `sudo` command before `docker` commands. T
     
     
 ```{bash eval=FALSE, echo=TRUE}
-cd GEB-2021-0553
+cd SDM-Spatial-Validation
 
 docker build -t rvalavi:4.0 .
 

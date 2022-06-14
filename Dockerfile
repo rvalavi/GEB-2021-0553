@@ -11,7 +11,8 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     libudunits2-dev \
     libhdf5-dev \
     libnetcdf-dev \
-    netcdf-bin
+    netcdf-bin \
+    default-jre
 
 ## update system libraries
 RUN apt-get update && \
@@ -36,6 +37,7 @@ RUN Rscript -e  "remotes::install_github('b0rxa/scmamp')"
 RUN Rscript -e  "remotes::install_github('rvalavi/myspatial')"
 RUN Rscript -e "remotes::install_version('gam', version = '1.20', repos = 'http://cran.us.r-project.org')"
 RUN Rscript -e "remotes::install_version('gbm', version = '2.1.5', repos = 'http://cran.us.r-project.org')"
+RUN Rscript -e "install.packages('rJava')"
 
 # copy maxent.jar file to dismo package
 COPY maxent.jar /usr/local/lib/R/site-library/dismo/java/
