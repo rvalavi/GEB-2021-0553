@@ -1,4 +1,4 @@
-Model,Parameter,Value,Description
+Method,Parameter,Values,Description
 MaxEnt (default),betamultiplier,1,regularization multiplier
 ,args,nothreshold,auto select feature and exclude threshold feature
 MaxEnt noclamp,,,the same as MaxEnt (default) with clammping set to off for prediction
