@@ -14,11 +14,11 @@ author:
     orcid_id: 0000-0002-8706-0326
   - name: José J. Lahoz-Monfort 
     affiliation: Pyrenean Institute of Ecology, Spanish National Research Council (CSIC), Spain
-    affiliation_url: https://google.com/
+    affiliation_url: http://www.ipe.csic.es/conservacion-bio/
     orcid_id: 0000-0002-0845-7035
   - name: Gurutzeta Guillera-Arroita 
     affiliation: Pyrenean Institute of Ecology, Spanish National Research Council (CSIC), Spain
-    affiliation_url: https://google.com/
+    affiliation_url: http://www.ipe.csic.es/conservacion-bio/
     orcid_id: 0000-0002-8387-5739
 twitter: 
   site: "@ValaviRoozbeh"
