@@ -179,27 +179,27 @@ docker images
 
 You should see `rvalavi` with TAG 4.0 listed as a Docker image.
     
-After the image is created (or loaded), you need to run a container to get access to the RStudio and packages. The Docker container is a live instance of the image. Use the following command to run a container to access RStudio.
+After the image is created (or loaded), you need to run a container to get access to RStudio and the R packages. The Docker container is a live instance of the image. Use the following command to run a container to access RStudio.
 
 ```{bash eval=FALSE, echo=TRUE}
-docker run --name rstudio -p 8787:8787 -e PASSWORD=123 -e USER=rstudio -d rvalavi:4.0
+docker run --name rstudio -p 8787:8787 -e PASSWORD=123 -d rvalavi:4.0
 
 ```
 
 This code has several components:  
 `--name`: name of the container  
 `-p`: port on which container is running. We use this to connect to rstudio  
-`-e USER` and `-e PASSWORD`: username and password for the rstudio server (use `rstudio` as username)  
+`-e PASSWORD`: password for the rstudio server (you can choose any password)  
 `-v`: mapping a directory in the local system to a directory in the container (this was not used in the code above). This will allow you to save the generated files and code in local drive and also access to code/data inside your system.  
 `-d`: run the container in the background   
 `rvalavi:4.0`: name and tag of the Docker image  
 
 
-Now, run RStudio server from container. Open an Internet browser and go to `localhost:8787` to open RStudio. Use the username and password you specified in the previous step (here user is "rstudio" and password is "123") to open RStudio.
+Now, run RStudio server from container. Open an Internet browser and go to `localhost:8787` to open RStudio. Use "**rstudio**" as username and the password you specified in the previous step (here password is "123") to open RStudio.
 
 ![](rstudio.png)
 
-You can run models by running the `R/nceas_modelling.R` script.
+You can run the models by running the `R/nceas_modelling.R` script. The model predictions will be stored in `output/nceas_model_output` folder. To calculate evaluations, run `R/nceas_evaluation.R` script.
 
 
 
@@ -233,7 +233,7 @@ We used $AUC_{ROC}$, $AUC_{PRG}$ and COR for evaluating the models. $AUC_{ROC}$ 
 
 ## `r sn <- sn + 1; sn`- Difference from average
 
-To further highlight the difference between the performance of models (dispersion of validation metrics), we calculated, for each species, the difference between the $AUC_{ROC}$ of each method and the average $AUC_{ROC}$ of all modelling methods for that species (figure 1), and the min $AUC_{ROC}$ (Figure 2).
+To further highlight the difference between the performance of models (dispersion of validation metrics), we calculated, for each species, the difference between the $AUC_{ROC}$ of each method and the average $AUC_{ROC}$ of all modelling methods for that species (figure 1), and the min $AUC_{ROC}$ (Figure 2). Values higher than zero indicate $AUC_{ROC}$ higher than average.
 
 ```{r}
 library(tidyverse)
