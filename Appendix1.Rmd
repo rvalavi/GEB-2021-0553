@@ -1,5 +1,5 @@
 ---
-title: "Performance ranking of flexible species distribution modelling methods does not change with spatial cross-validation. Global Ecology and Biogeography"
+title: "Flexible species distribution modelling methods perform well on spatially separated testing data. Global Ecology and Biogeography"
 description: |
   Appendix 1
 author:
@@ -38,6 +38,7 @@ output:
   distill::distill_article:
     toc: true
     toc_depth: '2'
+    toc_float: true
     theme: theme.css
 creative_commons: CC BY
 header-includes: 
