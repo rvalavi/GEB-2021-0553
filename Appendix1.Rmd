@@ -60,7 +60,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Appendix 1 for *Valavi, R., Elith, J., Lahos-Monfort, J.J., Guillera-Arroita, G.  (2022) Performance ranking of flexible species distribution modelling methods does not change with spatial cross-validation. Global Ecology and Biogeography.*
+Appendix 1 for *Valavi, R., Elith, J., Lahos-Monfort, J.J., Guillera-Arroita, G.  (2022) Flexible species distribution modelling methods perform well on spatially separated testing data. Global Ecology and Biogeography.*
 
 
 
