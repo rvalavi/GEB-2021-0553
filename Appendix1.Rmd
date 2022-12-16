@@ -115,14 +115,15 @@ You can find species data in `disdat` R package, with the rasters available on O
     
 To reproduce our results, you can use any of the following (details below): 
 
-- Use the `revn.lock` file in OSF and retrieve the R package versions in your local system with [`renv`](https://rstudio.github.io/renv/articles/renv.html) package
+* Using [`renv`](https://rstudio.github.io/renv/articles/renv.html) package recovery in local R environment
+    + Use the `revn.lock` file in [OSF repository](https://osf.io/g6dc3/?view_only=2f91390cb8f14ae3ba75c35427e017e4) and retrieve the R package versions in your local system with the `renv` package
 
-- Use the pre-built [Docker image]((https://www.docker.com/)) (`rvalavi_image.tar` stored in OSF) and create a virtual environment with the same R packages
+* Using [Docker]((https://www.docker.com/)) containers
+    + Use the pre-built Docker image (`rvalavi_image.tar` stored in OSF) and create a virtual environment with the same R packages (recommended)
+    + Build a Docker image based on the `Dockerfile` provided in the [OSF repository](https://osf.io/g6dc3/?view_only=2f91390cb8f14ae3ba75c35427e017e4).
 
-- Build a Docker image based on the `Dockerfile` provided in the OSF repository
 
-
-### `r sn <- sn + 0.1; sn`- renv packge recovery
+### `r sn <- sn + 0.1; sn`- Using `renv` package recovery
 
 First, create a new RStudio project and place the `renv.lock` file in it. Use the commands below to restore the R package for modelling.
 
@@ -151,18 +152,20 @@ remotes::install_version('gbm', version = '2.1.5', repos = 'http://cran.us.r-pro
 ```
 
 
-### `r sn <- sn + 0.1; sn`- Using Docker container
+### `r sn <- sn + 0.1; sn`- Using Docker containers
 
 Here we explain how to use Dockers for creating a virtual system to reproduce our results. Docker can be installed on different platforms. You can find the instructions for installing Docker on different operating systems on their [website](https://docs.docker.com/get-docker/). Docker provides an RStudio installed and all the R and system packages required for running our analysis.
     
-To use Docker, you can either load the pre-built image, or build a new image from `Dockerfile`. To load the Docker image, first download the files from OSF, then use:
+To use Docker, you can either A) load the pre-built image (recommended), or B) build a new image from `Dockerfile`. 
+
+`A)` To load the Docker image, first download the files from OSF, then use:
 
 ```{bash eval=FALSE, echo=TRUE}
 docker load --input rvalavi_image.tar
 
 ```
 
-If you want to build the image in your local system, you need to download all the files in OSF (except "docker" folder). Then run the following terminal commands. In Linux systems you might need to use `sudo` before `docker` commands. 
+`B)` If you want to build the image in your local system, you need to download all the files in OSF (except "docker" folder). Then run the following terminal commands. In Linux systems you might need to use `sudo` before `docker` commands. 
     
 Go to the directory of downloaded files from the OSF within terminal and run:
     
@@ -180,7 +183,7 @@ docker images
 
 You should see `rvalavi` with TAG 4.0 listed as a Docker image.
     
-After the image is created (or loaded), you need to run a container to get access to RStudio and the R packages. The Docker container is a live instance of the image. Use the following command to run a container to access RStudio.
+After the image is loaded (A) or created (B), you need to run a container to get access to RStudio and the R packages. The Docker container is a live instance of the image. Use the following command to run a container to access RStudio.
 
 ```{bash eval=FALSE, echo=TRUE}
 docker run --name rstudio -p 8787:8787 -e PASSWORD=123 -d rvalavi:4.0
@@ -228,7 +231,7 @@ knitr::kable(read.csv("maxent_parameters.csv"), caption = "Parameters of MaxEnt 
 
 ## `r sn <- sn + 1; sn`- Evaluation metrics
 
-We used $AUC_{ROC}$, $AUC_{PRG}$ and COR for evaluating the models. $AUC_{ROC}$ measures how well a model discriminates between presence and absence records in the test dataset. It can range from 0 to 1, with 1 indicating a model has perfect discrimination abilities and 0.5 showing discrimination is equivalent to that from random predictions (Pearce & Ferrier, 2000; Elith *et al.*, 2006). $AUC_{PRG}$ is similar to $AUC_{ROC}$, but less commonly used in ecology. It puts more focus on correctly predicted presences (Flach & Kull, 2015; Sofaer *et al.*, 2019). An $AUC_{PRG}$ value of 1 shows perfect discrimination, 0 indicates random discrimination and negative denotes worse than random. Since there is no lower limit for negative values in $AUC_{PRG}$, we only estimated ranks, not mean performance, for this metric. COR is the correlation between model predictions and the presence-absence testing data (Elith *et al.*, 2006). 
+We used $AUC_{ROC}$, $AUC_{PRG}$ and COR for evaluating the models. $AUC_{ROC}$ measures how well a model discriminates between presence and absence records in the test dataset. It can range from 0 to 1, with 1 indicating a model has perfect discrimination abilities and 0.5 showing discrimination is equivalent to that from random predictions (Pearce & Ferrier, 2000; Elith *et al.*, 2006). $AUC_{PRG}$ is similar to $AUC_{ROC}$, but less commonly used in ecology. It puts more focus on correctly predicted presences (Flach & Kull, 2015). An $AUC_{PRG}$ value of 1 shows perfect discrimination, 0 indicates random discrimination and negative denotes worse than random. Since there is no lower limit for negative values in $AUC_{PRG}$, we only estimated ranks, not mean performance, for this metric. COR is the correlation between model predictions and the presence-absence testing data (Elith *et al.*, 2006). 
 
 
 
@@ -863,7 +866,63 @@ ggplot(data = ., aes(y = spatial, x = random, col = region)) +
 
 ## `r sn <- sn + 1; sn`- List of species used in modelling
 
-For creating spatial blocks some species did not have enough data to fit and evaluate models. Here, we provide the list of species we used in our study.
+For creating spatial blocks some species did not have enough data to fit and evaluate models. Here, we provide the list of species we used in our study. You can see the location of each region on the world map in Figure 10. Read detailed explanation of this dataset in Elith *et al* (2020).
+
+```{r fig.width=14, fig.height=8, fig.cap="Location of each region in the world."}
+library(tidyverse)
+library(ggrepel)
+library(sf)
+library(disdat)
+
+basemap <- geodata::world(resolution = 5, path = "temp/") %>% 
+  st_as_sf()
+
+robinson <- "+proj=robin +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+
+
+regions <- c('AWT', 'NSW', 'CAN', 'SWI', 'NZ', 'SA')
+reg <- regions[2]
+
+xycent <- data.frame("x" = 1, "y" = 1, 'id' = 'aa')
+for(i in seq_along(regions)){
+  reg <- regions[i]
+  map <- disdat::disBorder(reg) %>% 
+    st_union() %>% 
+    st_transform(crs = robinson)
+  pnt <- st_centroid(map)
+  xycent[i, 'x'] <- st_coordinates(pnt)[1]
+  xycent[i, 'y'] <- st_coordinates(pnt)[2]
+  xycent[i, 'id'] <- reg
+}
+
+xycent$names <- c('Australian Wet Tropic (AWT)',
+                  'New South Wales (NSW)',
+                  'Ontario, Canada (CAN)',
+                  'Switzerland (SWI)',
+                  'New Zealand (NZ)',
+                  'South American countries (SA)')
+
+# Swiss location is not correct in the original data
+swiss_xy <- data.frame(x=8, y=47) %>% 
+  st_as_sf(coords=1:2, crs=4326) %>% 
+  st_transform(crs = robinson) %>% 
+  st_coordinates()
+
+xycent$x[4] <- swiss_xy[1]
+xycent$y[4] <- swiss_xy[2]
+
+ggplot() +
+  geom_sf(data = basemap, col = 'white', size = 0.1, fill = 'gray') +
+  geom_point(data = xycent, aes(x=x, y=y), color = 'red', size = 4) +
+  geom_text_repel(data = xycent, aes(x=x, y=y, label = names), size = 7,
+                  box.padding = 0.8, max.overlaps = Inf) +
+  coord_sf(crs = robinson) +
+  theme_minimal() +
+  theme(axis.title =  element_blank())
+
+```
+
+
 
 ```{r}
 
@@ -878,7 +937,7 @@ knitr::kable(sp_list, caption = "List of species used for modelling. PO is the n
 ## `r sn <- sn + 1; sn`- Statistical tests
 ### `r sn <- sn + 0.1; sn`- Statistical test for random partitioning
 
-Here the statistical test on the differences between methods in random partitioning are presented (Figure 10). The plots are $AUC_{ROC}$, $AUC_{PRG}$, and COR from top to bottom, respectively. The number on the top of the x-axis shows the range of the ranks of the models. The average rank of each model is indicated by the thin line connected to the axis. The lines (methods) that are connected by the horizontal thick line are not statistically different at 0.05 significance level.
+Here the statistical test on the differences between methods in random partitioning are presented (Figure 11). The plots are $AUC_{ROC}$, $AUC_{PRG}$, and COR from top to bottom, respectively. The number on the top of the x-axis shows the range of the ranks of the models. The average rank of each model is indicated by the thin line connected to the axis. The lines (methods) that are connected by the horizontal thick line are not statistically different at 0.05 significance level.
 
 ```{r fig.width=9, fig.cap="Average rank and statistical difference of the methods in random partitioning."}
 library(tidyverse)
@@ -992,7 +1051,7 @@ plotRanking(post_results3$corrected.pval,
 
 ### `r sn <- sn + 0.1; sn`- Statistical test for MaxEnt variants in spatial partitioning
 
-The Friedman’s Aligned Rank test indicated no significant difference among MaxEnt variants for $AUC_{PRG}$. Thus here we only plot the result of pairwise test for $AUC_{ROC}$ and COR (Figure 11). In general the differences between models are also insignificant for these statistics.
+The Friedman’s Aligned Rank test indicated no significant difference among MaxEnt variants for $AUC_{PRG}$. Thus here we only plot the result of pairwise test for $AUC_{ROC}$ and COR (Figure 12). In general the differences between models are also insignificant for these statistics.
 
 
 ```{r}
@@ -1089,6 +1148,12 @@ plotRanking(post_results3$corrected.pval,
 
 
 
+## `r sn <- floor(sn) + 1; sn`- Poor model selection?
+
+One result of interest is that some flexible methods (SVM, MARS and RF-shallow) did not perform particularly well (Fig. 3-5). So why do these perform less well? It could be that they are not flexible enough: they have no or very limited interactions (Table 1). To explore this idea, we did explore how much interactions affect results for BRT and Maxent (Appendix 1 Section 8). Impacts are small and variable – for BRT, allowing interactions for species with >50 data points improves performance slightly, and for Maxent, enforcing product features decreases it, probably because enforced feature classes perform less well on species with fewer records. Other issues may be at play for SVM, MARS and RF-shallow.  It is possible that our implementation of them was not optimal, since we have more experience with the methods that did well than with some of these. SVM was fitted with defaults. Tuning options are available, so it may be worth testing this further. SVM did not perform as well in the “top 3” analysis (Appendix 1 Section 6) as it did in Valavi et al. (2022), where it was fitted with the same settings but on presence-random background data (rather than presence-TGB), and using more species and more data per species (because the current test-train experiment requires subsampling). These nuances could be further explored. MARS was fitted with the earth package in R (Milborrow, 2018). In Elith et al. (2006) MARS, fitted there using the mda R package, performed relatively better than in Valavi et al. (2022) and this study. We used earth because mda failed to fit MARS with many background samples for many species.  Perhaps different implementations of this model would perform better.  Finally, RF-shallow performed better on spatial partitioning than random partitioning (Fig. 3-5 and Appendix 1 Section 6), and may benefit from some tuning of tree depth parameter (e.g., Valavi et al. 2021). This is an experimental approach for RF, and still needs to be explored further. 
+
+
+
 ## `r sn <- floor(sn) + 1; sn`- References
 
 * Elith, J., Graham, C.H., Anderson, R.P., Dudík, M., Ferrier, S., Guisan, A., J Hijmans, R., Huettmann, F., R Leathwick, J., Lehmann, A., Li, J., G Lohmann, L., Overton, J.McC.M., Peterson, A.T., Phillips, S.J., Richardson, K., Scachetti-Pereira, R., Schapire, R.E., Soberón, J., Williams, S., Wisz, M.S. & Zimmermann, N.E. (2006) Novel methods improve prediction of species’ distributions from occurrence data. *Ecography*, 29, 129–151.
@@ -1104,8 +1169,6 @@ plotRanking(post_results3$corrected.pval,
 * Pearce, J. & Ferrier, S. (2000) Evaluating the predictive performance of habitat models developed using logistic regression. *Ecological modelling*, 133, 225–245.
 
 * Phillips, S.J., Dudík, M., Elith, J., Graham, C.H., Lehmann, A., Leathwick, J. & Ferrier, S. (2009) Sample selection bias and presence-only distribution models: implications for background and pseudo-absence data. *Ecological applications*, 19, 181–197.
-
-* Sofaer, H.R., Hoeting, J.A. & Jarnevich, C.S. (2019) The area under the precision-recall curve as a performance metric for rare binary events. *Methods in Ecology and Evolution*.
 
 * Valavi, R., Guillera‐Arroita, G., Lahoz‐Monfort, J.J. & Elith, J. (2022) Predictive performance of presence‐only species distribution models: a benchmark study with reproducible code. *Ecological Monographs*, 92, 1–27.
 
