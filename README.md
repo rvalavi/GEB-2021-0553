@@ -12,4 +12,4 @@ This repository stores the code and Appendix 1 for "*Flexible species distributi
 You can see the online version of the Appendix 1 here: [https://rvalavi.github.io/SDM-Spatial-Validation](https://rvalavi.github.io/SDM-Spatial-Validation/).
 
 ## Citation
-Please cite us by "*Valavi, R., Elith, J., Lahos-Monfort, J.J., Guillera-Arroita, G. (2022) Flexible species distribution modelling methods perform well on spatially separated testing data. Global Ecology and Biogeography.*" if you use the materials of this repository.
+Please cite us by "*Valavi, R., Elith, J., Lahos-Monfort, J.J., Guillera-Arroita, G. (2023) Flexible species distribution modelling methods perform well on spatially separated testing data. Global Ecology and Biogeography.*" if you use the materials of this repository.
