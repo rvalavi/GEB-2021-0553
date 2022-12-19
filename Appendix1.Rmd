@@ -1170,5 +1170,7 @@ One result of interest is that some flexible methods (SVM, MARS and RF-shallow) 
 
 * Phillips, S.J., Dudík, M., Elith, J., Graham, C.H., Lehmann, A., Leathwick, J. & Ferrier, S. (2009) Sample selection bias and presence-only distribution models: implications for background and pseudo-absence data. *Ecological applications*, 19, 181–197.
 
+* Valavi, R., Elith, J., Lahoz‐Monfort, J.J. & Guillera‐Arroita, G. (2021) Modelling species presence‐only data with random forests. *Ecography*, 44, 1731–1742.
+
 * Valavi, R., Guillera‐Arroita, G., Lahoz‐Monfort, J.J. & Elith, J. (2022) Predictive performance of presence‐only species distribution models: a benchmark study with reproducible code. *Ecological Monographs*, 92, 1–27.
 
