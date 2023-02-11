@@ -57,7 +57,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Appendix S1 for *Valavi, R., Elith, J., Lahos-Monfort, J.J., Guillera-Arroita, G.  (2023) Flexible species distribution modelling methods perform well on spatially separated testing data. Global Ecology and Biogeography. DOI: 10.1111/GEB.13639*
+Appendix S1 for *Valavi, R., Elith, J., Lahoz-Monfort, J. J., & Guillera-Arroita, G. (2023). Flexible species distribution modelling methods perform well on spatially separated testing data. Global Ecology and Biogeography, 32, 369–383.* [DOI: 10.1111/geb.13639](https://doi.org/10.1111/geb.13639)
 
 
 
