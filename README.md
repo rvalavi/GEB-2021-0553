@@ -1,8 +1,8 @@
-[![CC BY 3.0][cc-by-shield]][cc-by]
+[![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
 
-[cc-by]: http://creativecommons.org/licenses/by/3.0/
-[cc-by-image]: https://licensebuttons.net/l/by/3.0/88x31.png
-[cc-by-shield]: https://img.shields.io/badge/License-CC%20BY-lightgrey.svg
+[cc-by-sa]: http://creativecommons.org/licenses/by-sa/4.0/
+[cc-by-sa-image]: https://licensebuttons.net/l/by-sa/4.0/88x31.png
+[cc-by-sa-shield]: https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg
 
 ## Appendix S1
 
